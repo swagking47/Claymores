@@ -8,12 +8,15 @@ use pocketmine\level;
 use pocketmine\level\Explosion;
 use pocketmine\level\Position;
 use pocketmine\plugin\PluginBase;
+use pocketmine\player;
 
 class Main extends PluginBase implements Listener{
     private $claymore;
     private $explosionSize;
     private $blockDestroy;
     private $activateNearbyClaymores;
+    private $claymore1
+    private $fire
     
     public function onLoad(){
     }
@@ -24,7 +27,10 @@ class Main extends PluginBase implements Listener{
         $this->claymore = $config->get("ClaymoreBlock");
         $this->explosionSize = $config->get("ExplosionSize");
         $this->blockDestroy = $config->get("BlockDestroy");
+        $this->claymore1 = $config->get("ClaymoreBlock1");
+        $this->fire = $config->get("firesecs");
         $this->activateNearbyClaymores = $config->get("ActivateNearbyClaymores");
+        
         $this->getLogger()->info("Claymores has been enabled.");
 	}
 	
@@ -42,11 +48,11 @@ class Main extends PluginBase implements Listener{
 		$explosion = new Explosion(new Position($entity->x, ($entity->y -1), $entity->z, $entity->getLevel()), $this->explosionSize);
                 $explosion->explode();
             }
-            else{
-                //Future code goes here
-            }
 	}
-    }
+            if($claymore == $this->claymore1){
+            $entity->setOnFire($this->fire * 20)  
+              }
+	}
 	
     public function onDisable(){
         $this->getLogger()->info("Claymores has been disabled.");
