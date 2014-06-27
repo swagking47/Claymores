@@ -5,3 +5,5 @@ ActivateNearbyClaymores: false
 #MobActivation: false
 #ItemActivation: false
 #MinecartActivation: false
+ClaymoreBlock1: 44
+firesecs: 5
