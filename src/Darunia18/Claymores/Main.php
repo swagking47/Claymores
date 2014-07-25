@@ -7,6 +7,7 @@ use pocketmine\event\entity\EntityMoveEvent;
 use pocketmine\event\Listener;
 use pocketmine\level\Explosion;
 use pocketmine\level\Level;
+use pocketmine\player;
 use pocketmine\level\Position;
 use pocketmine\plugin\PluginBase;
 
@@ -49,7 +50,7 @@ class Main extends PluginBase implements Listener{
         $entity = $event->getEntity();
         $claymore = $entity->getLevel()->getBlockIdAt($entity->x, ($entity->y -0.5), $entity->z);
         if($claymore == $this->claymore){
-            if($entity instanceof \pocketmine\entity\Human){
+            if($entity instanceof player){
                 if($this->playerActivation){
                     if($this->blockDestroy){
                         $explosion = new Explosion(new Position($entity->x, ($entity->y -0.5), $entity->z, $entity->getLevel()), $this->explosionSize);
@@ -65,7 +66,7 @@ class Main extends PluginBase implements Listener{
             }
             elseif($entity instanceof \pocketmine\entity\Living){
                 if($this->mobActivation){
-                    if($entity instanceof \pocketmine\entity\Human){
+                    if($entity instanceof player){
                         //nothing
                     }
                     if($this->blockDestroy){
